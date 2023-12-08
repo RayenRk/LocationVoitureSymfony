@@ -76,4 +76,20 @@ class VoitureController extends AbstractController
             'editFormVoiture'=>$editform->createView()
         ]);
     }
+    #[Route('/searchVoiture', name:'voitureSearch')]
+    public function searchVoiture(Request $request, EntityManagerInterface $em): Response
+    {
+        $voiture = null;
+
+        if($request->isMethod('POST')){
+            $serie = $request->request->get("input_serie");
+            $query = $em->createQuery(
+                "SELECT v FROM App\Entity\Voiture v 
+                    WHERE v.serie LIKE '".$serie."'");
+
+            $voiture = $query->getResult();
+        }
+        return $this->render("voiture/rechercheVoiture.html.twig",
+        ["voitures"=>$voiture]);
+    }
 }

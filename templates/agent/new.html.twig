@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Agent{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+    <h1 class="display-4" style="margin-bottom: 40px">Create new Agent</h1>
+
+        {{ form_start(form) }}
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+
+        <div >
+            <div>
+                <input name="{{ field_name(form.nom) }}"
+                       value="{{ field_value(form.nom) }}"
+                       placeholder="{{ field_label(form.nom) }}"
+                       class="form-control"
+                style="margin-bottom:5px">
+
+
+                <input name="{{ field_name(form.prenom) }}"
+                       value="{{ field_value(form.prenom) }}"
+                       placeholder="{{ field_label(form.prenom) }}"
+                       class="form-control">
+            </div>
+        </div>
+        <button class="btn">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+
+
+
+
+    <a href="{{ path('app_agent_index') }}">back to list</a>
+    </div>
+
+{% endblock %}
